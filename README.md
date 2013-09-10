@@ -9,6 +9,7 @@ To use all files you will need to download:
 	 graphics.py
 	 libLeap.dylib
 
+
 2. you will also need to download pygames from www.pygame.org/download.shtml
 	download the appropriate file for your system
 
