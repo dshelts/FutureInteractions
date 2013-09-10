@@ -11,7 +11,7 @@ To use all files you will need to download:
 
 Status
 Week 1
-- familiarizing ourselves with the documentation of Leap motion, and analysis or sample code "sample.py" this is part of the sdk package downloaded through www.leapmotion.com/developer. A lot of trying to figure out group dynamics as well as trying to figure out how to start.
+- familiarizing ourselves with the documentation of Leap motion, and analysis or sample code "sample.py" this is part of the sdk package downloaded through www.developer.leapmotion.com. A lot of trying to figure out group dynamics as well as trying to figure out how to start.
 
 Week 2
 - "HelloWorld.py" is a modified file from the "sample.py" given in the sdk file, it was mostly to boil down to the raw bones of sample given
