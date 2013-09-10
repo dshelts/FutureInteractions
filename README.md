@@ -3,11 +3,7 @@ Surgeon-Sim, status update and files neccessary
 Group: Zevi, Angel, Sven, Andrew
 
 To use all files you will need to download:
-1. Leap.py
-	 Leap.so
-	 basketball.gif
-	 graphics.py
-	 libLeap.dylib
+1. Leap.py, Leap.so, basketball.gif, graphics.py, libLeap.dylib
 
 
 2. you will also need to download pygames from www.pygame.org/download.shtml
@@ -15,7 +11,13 @@ To use all files you will need to download:
 
 Status
 Week 1
-- familiarizing ourselves with the documentation of Leap motion, and analysis or sample code "sample.py" this is part of the sdk package downloaded through leapmotion.com/developer. A lot of trying to figure out group dynamics as well as trying to figure out how to start.
+- familiarizing ourselves with the documentation of Leap motion, and analysis or sample code "sample.py" this is part of the sdk package downloaded through www.leapmotion.com/developer. A lot of trying to figure out group dynamics as well as trying to figure out how to start.
 
 Week 2
-- "HelloWorld.py"
+- "HelloWorld.py" is a modified file from the "sample.py" given in the sdk file, it was mostly to boil down to the raw bones of sample given
+- "BouncingBall.py" is a python program using the "graphics.py" that we initially had started with, but due to suggestions from others we started using pygame (downloadable from: www.pygame.org/download.shtml). Posted in this repo is "pygame_intro.py" which is the pygame verison of a bouncing ball that is explained here; http://www.pygame.org/docs/tut/intro/intro.html. 
+- "LinkAttempt-1.py" is a mess of a file trying to get a ball to bounce when a swipe gesture is initiated, but it doesn't work that way.(it doesn't work)  N.B: frames in python should not be used to call other functions because they are always changing.(don't think is explained correctly at the moment) Essentially if Swipe.gesture: then call FUNCTION(); doesn't work the way one might think it does.
+- "LinkAttempt-2.py" is a even further boiled down version of "HelloWorld.py", but only initializing the Swipe gesture. If Swipe Gesture occurs the program exits, because we wanted to see the information that was yeilded from the Swipe.
+
+Week 3
+- meeting 9/10/13 -- 3:30pm topics: getting everyone squared away with pygames and github. Setting goals and establishing the next step.
