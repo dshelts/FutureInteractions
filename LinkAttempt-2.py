@@ -117,6 +117,7 @@ class Ball():
 
 
 def main():
+	
 	listener = MyListener()
 	controller = Leap.Controller()
 	#sample listener
