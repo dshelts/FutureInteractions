@@ -9,7 +9,12 @@ To use all files you will need to download:
 2. you will also need to download pygames from www.pygame.org/download.shtml
 	download the appropriate file for your system
 
-Status
+Group Status:
+
+Week 1
+- Familiarizing ourselves with the documentation of Leap motion, and analysis or sample code "sample.py" this is part of the sdk package downloaded through https://developer.leapmotion.com. A lot of trying to figure out group dynamics as well as trying to figure out how to start.
+
+
 
 Week 2
 - "HelloWorld.py" is a modified file from the "sample.py" given in the sdk file, it was mostly to boil down to the raw bones of sample given
@@ -18,4 +23,5 @@ Week 2
 - "LinkAttempt-2.py" is a even further boiled down version of "HelloWorld.py", but only initializing the Swipe gesture. If Swipe Gesture occurs the program exits, because we wanted to see the information that was yeilded from the Swipe.
 
 Week 3
-- meeting 9/10/13 -- 3:30pm topics: getting everyone squared away with pygames and github. Setting goals and establishing the next step.
+-	This week I worked on the bouncing ball program using the pygame graphics library. I collaborated with my room mate Bryan and drew to get the class parts of the program functional,  and implemented a new style of drawing the ball onto the screen without having the frame rate look bad. 
+-	Right now the leap motions input is signified by a variable colored and sized dot. 
