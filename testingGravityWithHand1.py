@@ -74,21 +74,23 @@ class SampleListener(Leap.Listener):
 		
 		# Draw a line on top of the image on the screen
 		"""Testing hand"""
+		
+
 		image_width = 50
 		image_height = 50
 		hand_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		handball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
 		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
 		self.hand = Hand(hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
 		#hand_image = pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg")
+		
+
 		imagerect = hand_image.get_rect()
 		self.screen.blit(hand_image, (scaledX, scaledY))
 		pygame.display.flip()
 		#self.screen.blit(self.hand.image, self.hand.move())
 		
-
-
-
 		#pygame.draw.image(self.hand)
 		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
 		self.screen.blit(self.ball.image, self.ball.move())
@@ -96,6 +98,9 @@ class SampleListener(Leap.Listener):
 
 
 		if self.ball.surrounds((scaledX, scaledY)):
+
+
+
 			old_x, old_y = self.last_pos
 
 			self.ball.vY = 0
