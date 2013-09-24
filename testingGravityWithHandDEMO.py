@@ -73,7 +73,6 @@ class SampleListener(Leap.Listener):
 		scaledX, scaledY = (int(x*WIDTH), int(HEIGHT-(y*HEIGHT)))
 		
 		# Draw a line on top of the image on the screen
-		"""Testing hand"""
 		
 
 		image_width = 50
