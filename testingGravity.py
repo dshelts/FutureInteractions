@@ -1,11 +1,3 @@
-################################################################################
-# Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               #
-# Leap Motion proprietary and confidential. Not for distribution.              #
-# Use subject to the terms of the Leap Motion SDK Agreement available at       #
-# https://developer.leapmotion.com/sdk_agreement, or another agreement         #
-# between Leap Motion and you, your company or other organization.             #
-################################################################################
-
 import Leap, sys, pygame
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
@@ -23,7 +15,7 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/299 Project/Intro-Leap-Motion-App/basketball.jpg"), (image_width, image_height))
+		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 
 		self.screen = pygame.display.set_mode(SIZE)
@@ -97,7 +89,7 @@ class SampleListener(Leap.Listener):
 
 
 class Ball():
-	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(400, 400)):
+	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350, 350)):
 		self.image = image
 
 		self.x, self.y = pos
