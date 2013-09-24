@@ -25,7 +25,7 @@ class SampleListener(Leap.Listener):
 
 
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
+		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
 		
@@ -77,8 +77,8 @@ class SampleListener(Leap.Listener):
 
 		image_width = 50
 		image_height = 50
-		hand_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
-		handball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
+		hand_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		handball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
 		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
 		self.hand = Hand(hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		self.hand = Hand(handball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
