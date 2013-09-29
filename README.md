@@ -1,6 +1,9 @@
 Surgeon-Sim, status update and files neccessary
 ===========
+<<<<<<< HEAD
 Group: Zevi, Angel, Sven, Andrew
+=======
+>>>>>>> parent of b75d798... Adding test commment
 
 To use all files you will need to download:
 1. Leap.py, Leap.so, basketball.gif, graphics.py, libLeap.dylib
