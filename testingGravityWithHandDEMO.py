@@ -5,6 +5,11 @@
 # https://developer.leapmotion.com/sdk_agreement, or another agreement         #
 # between Leap Motion and you, your company or other organization.             #
 ################################################################################
+# get_rect dont repeated call it want to set that up in on_init
+# blit should be the only thing in on frame
+#
+#
+#
 
 import Leap, sys, pygame
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
@@ -25,17 +30,24 @@ class SampleListener(Leap.Listener):
 
 
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
+		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
 		
 
-
-
-
 		self.screen = pygame.display.set_mode(SIZE)
 		self.last_pos = (0, 0)
 
+
+		image_width = 50
+		image_height = 50
+		self.hand_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"), (image_width, image_height))
+		self.handball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"), (image_width, image_height))
+		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		self.hand = Hand(self.hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		self.handball = Hand(self.handball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		#hand_image = pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg")
+		
 
 		
 		print "Initialized"
@@ -75,31 +87,22 @@ class SampleListener(Leap.Listener):
 		# Draw a line on top of the image on the screen
 		
 
-		image_width = 50
-		image_height = 50
-		hand_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
-		handball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
-		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
-		self.hand = Hand(hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
-		self.hand = Hand(handball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
-		#hand_image = pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg")
-		
 		if not self.ball.surrounds((scaledX, scaledY)):
-
-			imagerect = hand_image.get_rect()
-			self.screen.blit(hand_image, (scaledX, scaledY))
+			self.screen.blit()
+			imagerect = self.hand_image.get_rect()#cleaned up to self.
+			self.screen.blit(self.hand_image, (scaledX, scaledY))#cleaned up
 			pygame.display.flip()
 		#self.screen.blit(self.hand.image, self.hand.move())
 		
 		#pygame.draw.image(self.hand)
 		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
-			self.screen.blit(self.ball.image, self.ball.move())
-		#self.screen.blit(self.hand.image, self.hand.move())
+			#self.screen.blit(self.ball.image, self.ball.move())
+			#self.screen.blit(self.hand.image, self.hand.move())
 
 
 		if self.ball.surrounds((scaledX, scaledY)):
-			imagerect = handball_image.get_rect()
-			self.screen.blit(handball_image, (scaledX, scaledY))
+			imagerect = self.handball_image.get_rect()#self.
+			self.screen.blit(self.handball_image, (scaledX, scaledY))#self.
 			pygame.display.flip()
 			#self.screen.blit(self.ball.image, self.ball.move())
 

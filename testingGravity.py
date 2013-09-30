@@ -20,6 +20,7 @@ class SampleListener(Leap.Listener):
 
 		self.screen = pygame.display.set_mode(SIZE)
 		self.last_pos = (0, 0)
+		self.screen.fill((0, 0, 0))
 		
 		print "Initialized"
 
@@ -48,7 +49,7 @@ class SampleListener(Leap.Listener):
 		finger = frame.fingers.frontmost
 
 		# for finger in frame.fingers:
-		self.screen.fill((0, 0, 0))
+		
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
 		x, y = normalizedPosition.x, normalizedPosition.y
