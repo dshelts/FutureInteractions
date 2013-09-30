@@ -15,7 +15,6 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 
 		self.screen = pygame.display.set_mode(SIZE)
