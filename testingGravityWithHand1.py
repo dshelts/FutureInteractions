@@ -1,3 +1,11 @@
+################################################################################
+# Copyright (C) 2012-2013 Leap Motion, Inc. All rights reserved.               #
+# Leap Motion proprietary and confidential. Not for distribution.              #
+# Use subject to the terms of the Leap Motion SDK Agreement available at       #
+# https://developer.leapmotion.com/sdk_agreement, or another agreement         #
+# between Leap Motion and you, your company or other organization.             #
+################################################################################
+
 import Leap, sys, pygame
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
@@ -15,10 +23,20 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
+
+
+		ball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		
+		
+
+
+
 
 		self.screen = pygame.display.set_mode(SIZE)
 		self.last_pos = (0, 0)
+
+
 		
 		print "Initialized"
 
@@ -55,10 +73,52 @@ class SampleListener(Leap.Listener):
 		scaledX, scaledY = (int(x*WIDTH), int(HEIGHT-(y*HEIGHT)))
 		
 		# Draw a line on top of the image on the screen
-		pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
+		"""Testing hand"""
+<<<<<<< HEAD
+		image_width = 50
+		image_height = 50
+		hand_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+=======
+		
+
+		image_width = 50
+		image_height = 50
+		hand_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		handball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
+>>>>>>> e20c8c6f67bee8b48535c0abd84be39df33a942f
+		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		self.hand = Hand(hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		
+		#hand_image = pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg")
+<<<<<<< HEAD
+=======
+		
+
+>>>>>>> e20c8c6f67bee8b48535c0abd84be39df33a942f
+		imagerect = hand_image.get_rect()
+		self.screen.blit(hand_image, (scaledX, scaledY))
+		pygame.display.flip()
+		#self.screen.blit(self.hand.image, self.hand.move())
+		
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> e20c8c6f67bee8b48535c0abd84be39df33a942f
+		#pygame.draw.image(self.hand)
+		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
 		self.screen.blit(self.ball.image, self.ball.move())
+		#self.screen.blit(self.hand.image, self.hand.move())
+
 
 		if self.ball.surrounds((scaledX, scaledY)):
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> e20c8c6f67bee8b48535c0abd84be39df33a942f
 			old_x, old_y = self.last_pos
 
 			self.ball.vY = 0
@@ -86,9 +146,53 @@ class SampleListener(Leap.Listener):
 		if state == Leap.Gesture.STATE_INVALID:
 			return "STATE_INVALID"
 
+class Hand():
+	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(400,400)):
+		self.image = image
+
+		self.x, self.y = pos
+		self.width, self.height = size
+		self.xBound, self.yBound = bounds
+
+		self.vX = 0
+		self.vY = 0
+
+		self.state = 0 # 0 = Falling, 1 = Rising
+
+	def move(self):
+		self.x += self.vX
+		self.y += self.vY
+
+		self.update()
+
+		return (self.x, self.y)
+
+	def update(self):
+		if self.y > self.yBound:
+			self.y = self.yBound
+			if self.state == 0:
+				self.state = 1
+			else:
+				self.state = 0
+
+			self.vY = -self.vY
+
+		if self.x > self.xBound or self.x < 0:
+			self.x = self.xBound
+
+		self.vY += .05 # Gravity
+		self.vX *= .9 # Friction
+
+	def surrounds(self, pointer_pos):
+		x, y = pointer_pos
+		if x < (self.x + self.width) and x > (self.x) and y < (self.y + self.height) and y > (self.y):
+			return True
+
+
+
 
 class Ball():
-	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350, 350)):
+	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(400, 400)):
 		self.image = image
 
 		self.x, self.y = pos
