@@ -23,7 +23,7 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/299 Project/Intro-Leap-Motion-App/basketball.jpg"), (image_width, image_height))
+		ball_image = pygame.transform.scale(pygame.image.load("basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 
 		self.screen = pygame.display.set_mode(SIZE)
