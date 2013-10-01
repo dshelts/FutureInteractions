@@ -49,6 +49,8 @@ class Ball():
 #-----HAND CLASS----------------------------------------------------------
 class Hand():
 	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350,350)):
+		
+		self.image = image
 		self.hx, self.hy = pos
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
@@ -63,6 +65,13 @@ class Hand():
 		#self.update()
 
 		return(self.x, self.y)
+
+	def openToClose(self):
+		
+		if not self.ball.surrounds((scaledX, scaledY)):
+			self.screen.blit(openHand_image, (scaledX, scaledY))
+		else:
+			self.screen.blit(closedHand_image, (scaledX, scaledY))
 
 	#def update
 
