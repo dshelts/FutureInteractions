@@ -28,9 +28,13 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
+ball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 
-
+<<<<<<< HEAD
+		
+=======
 		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"), (image_width, image_height))
+>>>>>>> 8b436fccc52ba084d4ccd6b80eb3e7a66c50941a
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
 		
@@ -76,6 +80,7 @@ class SampleListener(Leap.Listener):
 
 		finger = frame.fingers.frontmost
 
+		
 		# for finger in frame.fingers:
 		self.screen.fill((0, 0, 0))
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
@@ -86,6 +91,20 @@ class SampleListener(Leap.Listener):
 		
 		# Draw a line on top of the image on the screen
 		
+
+<<<<<<< HEAD
+		image_width = 50
+		image_height = 50
+		hand_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		handball_image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithBall.jpg"), (image_width, image_height))
+		#pygame.draw.image = pygame.transform.scale(pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg"), (image_width, image_height))
+		self.hand = Hand(hand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		self.hand = Hand(handball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		#hand_image = pygame.image.load("/Users/zevirc/Desktop/Surgeon-Sim/HandWithoutBall.jpg")
+		
+=======
+>>>>>>> 8b436fccc52ba084d4ccd6b80eb3e7a66c50941a
+
 
 		if not self.ball.surrounds((scaledX, scaledY)):
 			self.screen.blit()
