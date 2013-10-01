@@ -64,12 +64,21 @@ class Hand():
 
 		#initializer for the Hand class
 		
+
+		#initializer for the Hand class
+		
+
+		self.hx, self.hy = pos #sets the initial position of the hand
+		self.width, self.height = size #sets the size of the ball
+		self.xBound, self.yBound = bounds #sets the boundaries of the ball within the screen
+
 		self.hx, self.hy = pos
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
-		self.vhx = 0
-		self.vhy = 0
+
+		self.vhx = 0 #sets the initial velocity of the hand in the horizontal to 0
+		self.vhy = 0 #sets the initial velocity of the hand in the verticle to 0 
 
 	def move(self):
 		hx+=vhx
@@ -91,15 +100,18 @@ class Hand():
 
 
 	#def update(self, vhx, vhy):
-	
-		
+
 	def surrounds(self, pointer_pos):
+		#surrounds method for the hand class
+		
 		x, y = pointer_pos
-		if x < (self.hx + self.width) and x > (self.hx) and y < (self.hy + self.height) and y > (self.hy):
+		if x < (self.hx + self.width) and x > (self.hx) and y < (self.hy + self.height) and y > (self.hy):#if statement to check for the hand and the ball having the same coordinates
+		#returns a boolean
 			return True
 
 #-----HAND CLASS END------------------------------------------------------
 
+<<<<<<< HEAD
 
 #-----PORTAL CLASS--------------------------------------------------------
 
@@ -148,3 +160,27 @@ class oportal():
 		
 #------ END portal Class----------------------------------------------------------------------------------
 	
+
+#-----PORTAL CLASS START--------------------------------------------------
+
+
+class portals(self):
+
+	def __init__(self, image, size= (50,100), pos1 =(0,0),pos2 =(350,350),  bounds=(350, 350)):
+		#initializer for the portals class
+		
+		#image 1+2 set the image for the portals as the same image(will be different images later)
+		self.image1 = image
+		self.image2 = image
+		
+		self.width, self.height = size #sets the size for both portals
+		
+		self.x1, self.y1 = pos1 #the starting coordinates for portal 1
+		
+		self.x2, self.y2 = pos2 #the starting coordinates for portal 2
+		
+		self.xbound, self.ybound = bounds #the bounds for both portals
+
+
+
+#-----PORTAL CLASS ENDS---------------------------------------------------
