@@ -66,9 +66,5 @@ class Hand():
 
 	#def update
 
-	def surrounds(self, pointer_pos):
-		x, y = pointer_pos
-		if x < (self.hx + self.width) and x > (self.hx) and y < (self.hy + self.height) and y > (self.hy):
-			return True
-
+	
 #-----HAND CLASS END------------------------------------------------------

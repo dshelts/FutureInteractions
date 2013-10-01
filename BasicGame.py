@@ -84,7 +84,8 @@ class SampleListener(Leap.Listener):
 		scaledX, scaledY = (int(x*WIDTH), int(HEIGHT-(y*HEIGHT)))
 		
 		# Draw a line on top of the image on the screen
-		pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
+		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
+		self.screen.blit(self.openHand.image, self.openHand.move(scaledX, scaledY))
 		self.screen.blit(self.ball.image, self.ball.move())
 
 		if self.ball.surrounds((scaledX, scaledY)):
