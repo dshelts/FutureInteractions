@@ -18,14 +18,14 @@ SIZE = WIDTH, HEIGHT
 image_width = 50
 image_height = 50
 
-MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"
+MYBALL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
+MYOPENPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image_width, image_height))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
-closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER) (image_width, image_height))
+MYCLOSEDPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
+closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
 #GLOBAL IMAGES
 
 #=======GLOBALS===== END =============================================================================
@@ -43,7 +43,7 @@ class SampleListener(Leap.Listener):
 		#Hand onFrame
 		self.openHand  = Hand(openHand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		#Closed Hand onFrame
-		self.closedHand  = Hand(openHand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
+		self.closedHand  = Hand(closedHand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
 		#SCREEN SET
 		self.screen = pygame.display.set_mode(SIZE)
@@ -76,18 +76,26 @@ class SampleListener(Leap.Listener):
 		finger = frame.fingers.frontmost
 
 		# for finger in frame.fingers:
-		self.screen.fill(0, 0, 0)
+		self.screen.fill((0, 0, 0))
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
 		x, y = normalizedPosition.x, normalizedPosition.y
 
-		scaledX, scaledY = (int(x*WIDTH), int(HEIGHT-(y*HEIGHT)))
+		scaledX, scaledY = (int((x*WIDTH)), int(HEIGHT-((y*HEIGHT))))
 		
 		# Draw a line on top of the image on the screen
-		pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
-		self.screen.blit(self.ball.image, self.ball.move())
+		#openHand.openToClose()
+
+		self.screen.blit(self.openHand.image, (scaledX, scaledY))
+
+		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
+		if not self.ball.surrounds((scaledX, scaledY)):
+			self.screen.blit(self.ball.image, self.ball.move())
 
 		if self.ball.surrounds((scaledX, scaledY)):
+			self.screen.blit(closedHand_image, (scaledX, scaledY))
+			#openHand.openToClose()
+
 			old_x, old_y = self.last_pos
 
 			self.ball.vY = 0

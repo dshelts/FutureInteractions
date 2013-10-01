@@ -58,11 +58,21 @@ class Ball():
 #-----HAND CLASS----------------------------------------------------------
 class Hand():
 	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350,350)):
+
+		
+		self.image = image
 		#initializer for the Hand class
 		
+
 		self.hx, self.hy = pos #sets the initial position of the hand
 		self.width, self.height = size #sets the size of the ball
 		self.xBound, self.yBound = bounds #sets the boundaries of the ball within the screen
+=======
+>>>>>>> f0be893f7c921079fa87876e2c48f5c1733b3827
+		self.hx, self.hy = pos
+		self.width, self.height = size
+		self.xBound, self.yBound = bounds
+>>>>>>> 6dfb4d7165acb840ae05e46b8553f14a9b7d677f
 
 		self.vhx = 0 #sets the initial velocity of the hand in the horizontal to 0
 		self.vhy = 0 #sets the initial velocity of the hand in the verticle to 0 
@@ -75,9 +85,19 @@ class Hand():
 
 		return(self.x, self.y)
 
-	#def update(self, vhx, vhy):
-	
+
+	def openToClose(self):
 		
+		if not self.ball.surrounds((scaledX, scaledY)):
+			self.screen.blit(openHand_image, (scaledX, scaledY))
+		else:
+			self.screen.blit(closedHand_image, (scaledX, scaledY))
+
+	#def update
+
+
+	#def update(self, vhx, vhy):
+
 	def surrounds(self, pointer_pos):
 		#surrounds method for the hand class
 		
