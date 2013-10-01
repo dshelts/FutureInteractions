@@ -1,9 +1,13 @@
 #Basic Game
+
+#Imports
 import Leap, sys, pygame
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
-
+from ClassesFile import *
+#=======GLOBALS=======================================================================================
 pygame.init()
 available_resolutions = pygame.display.list_modes()
+
 #GAME WINDOW
 WIDTH = 800
 HEIGHT = 400
@@ -11,6 +15,9 @@ SIZE = WIDTH, HEIGHT
 #GAME WINDOW
 
 #GLOBAL IMAGES
+image_width = 50
+image_height = 50
+
 MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
@@ -21,6 +28,7 @@ MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER) (image_width, image_height))
 #GLOBAL IMAGES
 
+#=======GLOBALS===== END =============================================================================
 
 #-----LEAP CLASS----------------------------------------------------------
 class SampleListener(Leap.Listener):
@@ -28,6 +36,7 @@ class SampleListener(Leap.Listener):
 		#General image size
 		image_width = 50
 		image_height = 50
+
 
 		#Ball onFrame
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
@@ -107,79 +116,8 @@ class SampleListener(Leap.Listener):
 			return "STATE_INVALID"
 #-----LEAP CLASS END------------------------------------------------------
 
-#-----BALL CLASS----------------------------------------------------------
-class Ball():
-	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350, 350)):
-		self.image = image
 
-		self.x, self.y = pos
-		self.width, self.height = size
-		self.xBound, self.yBound = bounds
-
-		self.vX = 0
-		self.vY = 0
-
-		self.state = 0 # 0 = Falling, 1 = Rising
-
-	def move(self):
-		self.x += self.vX
-		self.y += self.vY
-
-		self.update()
-
-		return (self.x, self.y)
-
-	def update(self):
-		if self.y > self.yBound:
-			self.y = self.yBound
-			if self.state == 0:
-				self.state = 1
-			else:
-				self.state = 0
-
-			self.vY = -self.vY
-
-		if self.x > self.xBound or self.x < 0:
-			self.x = self.xBound
-
-		self.vY += .05 # Gravity
-		self.vX *= .9 # Friction
-
-	def surrounds(self, pointer_pos):
-		x, y = pointer_pos
-		if x < (self.x + self.width) and x > (self.x) and y < (self.y + self.height) and y > (self.y):
-			return True
-#-----BALL CLASS END------------------------------------------------------
-
-
-
-#-----HAND CLASS----------------------------------------------------------
-class Hand():
-	def __init__(self, image, size=(50, 50), pos=(0, 0), bounds=(350,350)):
-		self.hx, self.hy = pos
-		self.width, self.height = size
-		self.xBound, self.yBound = bounds
-
-		self.vhx = 0
-		self.vhx = 0
-
-	def move(self):
-		hx+=vhx
-		hy+=vhy
-
-		#self.update()
-
-		return(self.x, self.y)
-
-	#def update
-
-	def surrounds(self, pointer_pos):
-		x, y = pointer_pos
-		if x < (self.hx + self.width) and x > (self.hx) and y < (self.hy + self.height) and y > (self.hy):
-			return True
-
-#-----HAND CLASS END------------------------------------------------------
-
+#-----MAIN----------------------------------------------------------------
 def main():
 	# Create a sample listener and controller
 	listener = SampleListener()
