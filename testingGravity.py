@@ -15,11 +15,11 @@ class SampleListener(Leap.Listener):
 		image_width = 50
 		image_height = 50
 
-		ball_image = pygame.transform.scale(pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/basketball.jpg"), (image_width, image_height))
 		self.ball = Ball(ball_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 
 		self.screen = pygame.display.set_mode(SIZE)
 		self.last_pos = (0, 0)
+		self.screen.fill((0, 0, 0))
 		
 		print "Initialized"
 
@@ -48,7 +48,7 @@ class SampleListener(Leap.Listener):
 		finger = frame.fingers.frontmost
 
 		# for finger in frame.fingers:
-		self.screen.fill((0, 0, 0))
+		
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
 		x, y = normalizedPosition.x, normalizedPosition.y
