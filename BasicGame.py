@@ -86,15 +86,15 @@ class SampleListener(Leap.Listener):
 		# Draw a line on top of the image on the screen
 		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)#color pointer for finder tip
 		#self.screen.blit(self.openHand.image, self.openHand.move(scaledX, scaledY))
-		self.screen.blit(self.ball.image, self.ball.move())
+		
 
-		self.screen.blit(self.openHand.image, (scaledX, scaledY))
+		
 
 		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
 
 		if not self.ball.surrounds((scaledX, scaledY)):
 			self.screen.blit(self.ball.image, self.ball.move())
-
+			self.screen.blit(self.openHand.image, (scaledX, scaledY))
 
 		if self.ball.surrounds((scaledX, scaledY)):
 			self.screen.blit(closedHand_image, (scaledX, scaledY))
