@@ -19,9 +19,12 @@ class Ball():
 
 	def move(self):
 		#updates the position of the ball
+		
+		
+			
 		self.x += self.vX #updates the x coordinate
 		self.y += self.vY #updates the y coordinate
-
+		
 		self.update()#calls the Ball class update method
 
 		return (self.x, self.y) #returns the new location
@@ -102,42 +105,73 @@ class Hand():
 #-----PORTAL CLASS--------------------------------------------------------
 
 
-class oportal():
-	def __init__(self, image, size=(50, 100), pos=(300, 0), bounds=(350, 350)):
+class Portal():
+	def __init__(self, image, size=(50, 100), pos=(0, 0), bounds=(350, 350)):
 		self.image = image
-
 		self.x, self.y = pos
+
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
-		self.vX = 0 #velocityX
-		self.vY = 0 #velocityY
-
-		self.state = 0 # 0 = Falling, 1 = Rising
-
-	def move(self):
-		self.x += self.vX
-		self.y += self.vY
+"""
+	def portalUpdateLocation(self):
+		
+		if self.x < 800:
+			self.x += 1
+		else:
+			self.x = 0
+		#self.x += self.vX
+		#self.y += self.vY
+		
 
 		self.update()
 
+		#Oportalx = self.x
+		return (self.x, self.y)
+		"""
+
+	def portalMoveRight(self):
+		self.x += 1
+		self.checkBounds()
+
 		return (self.x, self.y)
 
-	def update(self):
-		if self.y > self.yBound:
-			self.y = self.yBound
-			if self.state == 0:
-				self.state = 1
-			else:
-				self.state = 0
+	def portalMoveLeft(self):
+		self.x += -1
+		self.checkBounds()
 
-			self.vY = -self.vY
+		return (self.x, self.y)	
 
-		if self.x > self.xBound or self.x < 0:
-			self.x = self.xBound
+	def portalMoveDown(self):
+		self.y += 1 
+		self.checkBounds()
 
-		self.vY += .05 # Gravity
-		self.vX *= .9 # Friction
+		return (self.x, self.y)
+
+	def portalMoveUp(self):
+		self.x += -1
+		self.checkBounds()
+
+		return (self.x, self.y)
+
+
+
+	def checkBounds(self):
+		
+		#Logic check both x and y
+		"""
+		if self.x == self.xBound:
+			self.portalMoveDown()
+		elif self.y == self.yBound:
+			self.portalMoveLeft()
+		elif self.y == 0:
+			self.portalMoveUp()
+		elif self.x == 0:
+			self.portalMoveRight()
+		"""
+
+
+
 
 	def samePlace(self, pointer_pos):#change 
 		x, y = pointer_pos
@@ -150,5 +184,3 @@ class oportal():
 		
 #------ END portal Class----------------------------------------------------------------------------------
 	
-
-
