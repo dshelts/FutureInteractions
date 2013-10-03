@@ -18,13 +18,13 @@ SIZE = WIDTH, HEIGHT
 image_width = 50
 image_height = 50
 
-MYBALL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
+MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
-MYOPENPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
+MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image_width, image_height))
 
-MYCLOSEDPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
+MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
 #GLOBAL IMAGES
 
@@ -93,7 +93,7 @@ class SampleListener(Leap.Listener):
 		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
 
 		if not self.ball.surrounds((scaledX, scaledY)):
-			self.screen.blit(self.ball.image, self.ball.move())
+			self.screen.blit(self.ball.image, self.ball.moveLocation(x, y))
 			self.screen.blit(self.openHand.image, (scaledX, scaledY))
 
 		if self.ball.surrounds((scaledX, scaledY)):
