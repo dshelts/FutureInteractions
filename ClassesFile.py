@@ -17,19 +17,19 @@ class Ball():
 
 		self.state = 0 # 0 = Falling, 1 = Rising
 
-	def move(self):
+	def nextLocation(self, x, y):
 		#updates the position of the ball
-		
-		
-			
+		#if x or y !=0
+		#...
+
 		self.x += self.vX #updates the x coordinate
 		self.y += self.vY #updates the y coordinate
-		
-		self.update()#calls the Ball class update method
+
+		self.checkBounds()#calls the Ball class checkbounds method
 
 		return (self.x, self.y) #returns the new location
 
-	def update(self):
+	def checkBounds(self):
 		#The update method for the Ball class
 		
 		if self.y > self.yBound:
@@ -116,6 +116,10 @@ class Portal():
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25b259939aa3980bdc69e3dd74a7866a362b9a29
 
 	def directionCheck(self):
 		if self.checkOutOfBounds():
