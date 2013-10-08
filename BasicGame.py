@@ -12,7 +12,7 @@ available_resolutions = pygame.display.list_modes()
 WIDTH = 800
 HEIGHT = 400
 SIZE = WIDTH, HEIGHT
-BG = pygame.image.load("C:\Users\Mejia_000\Documents\GitHub\Surgeon-Sim\jpgs\court.png")
+BG = pygame.image.load("C:/Users/Mejia_000/Documents/GitHub/Surgeon-Sim/jpgs/court.jpg")
 #screen.blit(BG(0,0))
 #GAME WINDOW
 
@@ -20,13 +20,13 @@ BG = pygame.image.load("C:\Users\Mejia_000\Documents\GitHub\Surgeon-Sim\jpgs\cou
 image_width = 50
 image_height = 50
 
-MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
+MYBALL = "C:/Users/Mejia_000/Documents/GitHub/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
+MYOPENPOINTER = "C:/Users/Mejia_000/Documents/GitHub/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image_width, image_height))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
+MYCLOSEDPOINTER = "C:/Users/Mejia_000/Documents/GitHub/Surgeon-Sim/jpgs/HandWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
 #GLOBAL IMAGES
 
@@ -78,7 +78,9 @@ class SampleListener(Leap.Listener):
 		finger = frame.fingers.frontmost
 
 		# for finger in frame.fingers:
-		self.screen.fill((0, 0, 0))
+		#self.screen.fill((0, 0, 0))
+		self.screen.blit(BG, (0,0))
+		
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
 		x, y = normalizedPosition.x, normalizedPosition.y
