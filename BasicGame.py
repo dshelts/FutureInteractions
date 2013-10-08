@@ -12,6 +12,8 @@ available_resolutions = pygame.display.list_modes()
 WIDTH = 800
 HEIGHT = 400
 SIZE = WIDTH, HEIGHT
+BG = pygame.image.load("C:\Users\Mejia_000\Documents\GitHub\Surgeon-Sim\jpgs\court.png")
+#screen.blit(BG(0,0))
 #GAME WINDOW
 
 #GLOBAL IMAGES

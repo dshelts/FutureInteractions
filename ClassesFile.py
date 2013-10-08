@@ -124,51 +124,59 @@ class Portal():
 	def __init__(self, image, size=(50, 100), pos=(0, 0), bounds=(350, 350)):
 		self.image = image
 		self.x, self.y = pos
+		self.state = 0
+		self.vX = 0
+		self.vY = 0
 
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
-
-
-	def portalMoveRight(self):
-		self.x += 1
-		self.checkBounds()
-
-		return (self.x, self.y)
-
-	def portalMoveLeft(self):
-		self.x += -1
-		self.checkBounds()
-
-		return (self.x, self.y)	
-
-	def portalMoveDown(self):
-		self.y += 1 
-		self.checkBounds()
-
-		return (self.x, self.y)
-
-	def portalMoveUp(self):
-		self.x += -1
-		self.checkBounds()
-
-		return (self.x, self.y)
-
-
-
-	def checkBounds(self):
+	def directionCheck(self):
+		if self.checkOutOfBounds():
+			self.state += 1
+			if self.state > 3:
+				self.state = 0
 		
-		#Logic check both x and y
-		"""
-		if self.x == self.xBound:
-			self.portalMoveDown()
-		elif self.y == self.yBound:
-			self.portalMoveLeft()
-		elif self.y == 0:
-			self.portalMoveUp()
-		elif self.x == 0:
-			self.portalMoveRight()
-		"""
+		if state == 0:
+			self.vX = 1
+			self.vY = 0
+		if state == 1:
+			self.vX = 0
+			self.vY = 1
+		if state == 2:
+			self.vX = -1
+			self.vY = 0
+		if state == 3:
+			self.vX = 0
+			self.vY = -1
+
+
+
+	def move(self):
+		self.x+= self.vX
+		self.y+= self.vY
+
+
+
+
+	def checkOutOfBounds(self):
+		
+		
+		#Checkes if self.x or self.y is out of bounds and puts it in bounds if it is.
+		#also sets booleon to true if at one of the edges so it can change direction
+		if self.x >= self.xBound:
+			self.x = self.xBound
+			return True
+		elif self.y >= self.yBound:
+			self.y = self.yBound
+			return True
+		elif self.y <= 0:
+			self.x = 0
+			return True
+		elif self.x <= 0:
+			self.y = 0
+			return True
+		
 
 
 
