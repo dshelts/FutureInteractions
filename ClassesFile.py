@@ -116,11 +116,6 @@ class Portal():
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 25b259939aa3980bdc69e3dd74a7866a362b9a29
-
 	def directionCheck(self):
 		if self.checkOutOfBounds():
 			self.state += 1
