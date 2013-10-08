@@ -131,7 +131,7 @@ class SampleListener(Leap.Listener):
 		if self.ball.surrounds((scaledX, scaledY)):#if True
 			self.screen.blit(closedHandImage, (scaledX, scaledY))
 			#stops displaying ballImage
-			self.ball.resetGravity()#resets the gravity as if holding the image
+			#self.ball.resetGravity()#resets the gravity as if holding the image
 			#when you move hand away drops ball enters other if loop
 
 			old_x, old_y = self.last_pos
