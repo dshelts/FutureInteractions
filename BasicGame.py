@@ -12,8 +12,8 @@ available_resolutions = pygame.display.list_modes()
 WIDTH = 800
 HEIGHT = 400
 SIZE = WIDTH, HEIGHT
-BG = pygame.image.load("C:\Users\Mejia_000\Documents\GitHub\Surgeon-Sim\jpgs\court.png")
-#screen.blit(BG(0,0))
+
+
 #GAME WINDOW
 
 #GLOBAL IMAGES
@@ -28,6 +28,14 @@ openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image
 
 MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
+
+OPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Oportal.jpg"
+oPortal_image = pygame.transform.scale(pygame.image.load(OPORTAL), (100, 50))
+
+BPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Bportal.jpg"
+oPortal_image = pygame.transform.scale(pygame.image.load(BPORTAL), (100, 50))
+
+#BG = pygame.image.load("C:\Users\Mejia_000\Documents\GitHub\Surgeon-Sim\jpgs\court.png")
 #GLOBAL IMAGES
 
 #=======GLOBALS===== END =============================================================================
@@ -47,6 +55,9 @@ class SampleListener(Leap.Listener):
 		#Closed Hand onFrame
 		self.closedHand  = Hand(closedHand_image, (image_width, image_height), (WIDTH//2, 0), SIZE)
 		
+		self.oportal = Portal(oPortal_image, (100, 50), (1, 0), SIZE)
+
+		self.bportal = Portal(bPortal_image, (100, 50), (0, -HEIGHT//2), SIZE)
 		#SCREEN SET
 		self.screen = pygame.display.set_mode(SIZE)
 		self.last_pos = (0, 0)
@@ -77,7 +88,6 @@ class SampleListener(Leap.Listener):
 
 		finger = frame.fingers.frontmost
 
-		# for finger in frame.fingers:
 		self.screen.fill((0, 0, 0))
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
@@ -92,6 +102,8 @@ class SampleListener(Leap.Listener):
 		ball_pos = self.ball.x, self.ball.y #most recent ball position
 		openHandImage = self.openHand.image
 		closedHandImage = self.closedHand.image
+		oPortalImage = self.oportal.image
+		bPortalImage = self.bportal.image
 		#end COMMAND KEY
 		
 
@@ -100,6 +112,8 @@ class SampleListener(Leap.Listener):
 		if not self.ball.surrounds((scaledX, scaledY)):#if False
 			self.screen.blit(ballImage, self.ball.moveLocation(ball_pos))
 			self.screen.blit(openHandImage, (scaledX, scaledY))
+			self.screen.blit(oPortalImage, self.oportal.move())
+			self.screen.blit(bPortalImage, self.bportal.move())
 
 		if self.ball.surrounds((scaledX, scaledY)):#if True
 			self.screen.blit(closedHandImage, (scaledX, scaledY))
@@ -112,8 +126,11 @@ class SampleListener(Leap.Listener):
 			self.ball.x = scaledX-(self.ball.width//2)
 			self.ball.y = scaledY-(self.ball.height//2)
 
+		
 		self.last_pos = (scaledX, scaledY)
-
+		
+		
+		
 		pygame.display.update()
 		
 

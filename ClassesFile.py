@@ -153,9 +153,10 @@ class Portal():
 
 
 	def move(self):
+		self.directionCheck()
 		self.x+= self.vX
 		self.y+= self.vY
-
+		return (self.x, self.y)
 
 
 
