@@ -63,5 +63,6 @@ class Portal():
 		elif self.x <= 0:
 			self.y = 0
 			return True
-		
+		else:
+			pass
 

@@ -18,13 +18,13 @@ SIZE = WIDTH, HEIGHT
 image_width = 50
 image_height = 50
 
-MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
+MYBALL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
+MYOPENPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image_width, image_height))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
+MYCLOSEDPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
 #GLOBAL IMAGES
 
