@@ -83,27 +83,29 @@ class SampleListener(Leap.Listener):
 
 		scaledX, scaledY = (int((x*WIDTH)), int(HEIGHT-((y*HEIGHT))))
 		
-		# Draw a line on top of the image on the screen
-		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)#color pointer for finder tip
-		#self.screen.blit(self.openHand.image, self.openHand.move(scaledX, scaledY))
+
+		#COMMAND KEY
+		ballImage = self.ball.image #ball image access
+		pointer_pos = (scaledX, scaledY) #move recent pointer position
+		ball_pos = self.ball.x, self.ball.y #most recent ball position
+		openHandImage = self.openHand.image
+		closedHandImage = self.closedHand.image
+		#end COMMAND KEY
 		
 
 		
 
-		#pygame.draw.circle(self.screen, (255, 55, 55), (scaledX, scaledY), 20)
+		if not self.ball.surrounds((scaledX, scaledY)):#if False
+			self.screen.blit(ballImage, self.ball.moveLocation(ball_pos))
+			self.screen.blit(openHandImage, (scaledX, scaledY))
 
-		if not self.ball.surrounds((scaledX, scaledY)):
-			self.screen.blit(self.ball.image, self.ball.moveLocation("""x, y"""))
-			self.screen.blit(self.openHand.image, (scaledX, scaledY))
-
-		if self.ball.surrounds((scaledX, scaledY)):
-			self.screen.blit(closedHand_image, (scaledX, scaledY))
-
+		if self.ball.surrounds((scaledX, scaledY)):#if True
+			self.screen.blit(closedHandImage, (scaledX, scaledY))
+			#stops displaying ballImage
+			self.ball.resetGravity()#resets the gravity as if holding the image
+			#when you move hand away drops ball enters other if loop
 
 			old_x, old_y = self.last_pos
-
-			self.ball.vY = 0
-			self.ball.vX = 0
 
 			self.ball.x = scaledX-(self.ball.width//2)
 			self.ball.y = scaledY-(self.ball.height//2)
