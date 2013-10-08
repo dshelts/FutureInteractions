@@ -14,6 +14,10 @@ HEIGHT = 400
 SIZE = WIDTH, HEIGHT
 
 
+
+BG = pygame.image.load("/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/tyson.jpg")
+
+
 #GAME WINDOW
 
 #GLOBAL IMAGES
@@ -23,10 +27,10 @@ image_height = 50
 MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (image_width, image_height))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithoutBall.jpg"
+MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handEmpty.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (image_width, image_height))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/HandWithBall.jpg"
+MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (image_width, image_height))
 
 OPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Oportal.jpg"
@@ -88,7 +92,11 @@ class SampleListener(Leap.Listener):
 
 		finger = frame.fingers.frontmost
 
-		self.screen.fill((0, 0, 0))
+		# for finger in frame.fingers:
+		#self.screen.fill((0, 0, 0))
+		self.screen.blit(BG, (0,0))
+		
+
 		normalizedPosition = interactionBox.normalize_point(finger.stabilized_tip_position)
 
 		x, y = normalizedPosition.x, normalizedPosition.y
