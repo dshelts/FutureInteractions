@@ -17,17 +17,25 @@ class Ball():
 
 		self.state = 0 # 0 = Falling, 1 = Rising
 
-	def nextLocation(self, x, y):
+	def moveLocation(self, pos):
 		#updates the position of the ball
 		#if x or y !=0
 		#...
-
-		self.x += self.vX #updates the x coordinate
-		self.y += self.vY #updates the y coordinate
+		#pX, pY = pointer_pos
+		#self.x = pX
+		#self.y = pY
+		self.x += self.vX  #updates the x coordinate
+		self.y += self.vY#updates the y coordinate
 
 		self.checkBounds()#calls the Ball class checkbounds method
 
 		return (self.x, self.y) #returns the new location
+
+	def grabBall(self, pos):
+		self.x, self.y = pos
+		self.resetGravity()
+		self.checkBounds()
+		return(self.x, self.y)
 
 	def checkBounds(self):
 		#The update method for the Ball class
@@ -47,12 +55,19 @@ class Ball():
 		self.vY += .05 # Gravity
 		self.vX *= .9 # Friction
 
+	def resetGravity():
+		self.vY = 0
+		self.vX = 0
+
 	def surrounds(self, pointer_pos):
 		#surrounds method checks to see if your finger is holding the ball
 		
 		x, y = pointer_pos  #position of the pointer
 		
-		if x < (self.x + self.width) and x > (self.x) and y < (self.y + self.height) and y > (self.y): #if statement to check to see if your finger and the ball share the same coordinates
+
+		if x < (self.x + self.width) and x > (self.x) and y < (self.y + self.height) and y > (self.y): 
+		#if the pointer is the image box
+		#if statement to check to see if your finger and the ball share the same coordinates
 		#returns a boolean
 			return True
 #-----BALL CLASS END------------------------------------------------------
@@ -116,9 +131,12 @@ class Portal():
 		self.width, self.height = size
 		self.xBound, self.yBound = bounds
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 888f9d427b54b85d4e6db64f833fabde10c9c063
 	def directionCheck(self):
 		if self.checkOutOfBounds():
 			self.state += 1
@@ -141,9 +159,10 @@ class Portal():
 
 
 	def move(self):
+		self.directionCheck()
 		self.x+= self.vX
 		self.y+= self.vY
-
+		return (self.x, self.y)
 
 
 
