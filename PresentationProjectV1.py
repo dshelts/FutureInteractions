@@ -84,6 +84,8 @@ def runPygame(controller, listener):
 	font = pygame.font.SysFont("Times New Roman", 200)#font for text
 	pygame.display.set_caption("Catch")#set title
 
+	background.fill(BLACK)#fill background apperatnel
+	
 	# instantiate classes here
 		#Ball onFrame
 	Ballobj = Ball(ball_image, (50, 50), (WIDTH//2, 0), SIZE)
@@ -91,18 +93,21 @@ def runPygame(controller, listener):
 	OpenHand  = Hand(openHand_image, (50, 50), (WIDTH//2, 0), SIZE)
 		#Closed Hand onFrame
 	ClosedHand  = Hand(closedHand_image, (60, 60), (WIDTH//2, 0), SIZE)
-		
+		#Orange Portal
 	Oportal = Portal(oPortal_image, (100, 50), (1, 0), SIZE)
-
+		#Blue Portal
 	Bportal = Portal(bPortal_image, (100, 50), (0, -HEIGHT//2), SIZE)
 	
+ 
 
-	pointerWidth = 60#cursor width hand
-	pointerHeight = 60#cursor height hand
-	pointerSet = pointerWidth//2 #shifts hand to proper location
-
-	background.fill(BLACK)#fill background 
-
+	#COMMAND KEY
+	ballImage = Ballobj.image #ball image access
+	openHandImage = OpenHand.image
+	closedHandImage = ClosedHand.image
+	oPortalImage = Oportal.image
+	bPortalImage = Bportal.image
+	#end COMMAND KEY
+		
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -111,6 +116,7 @@ def runPygame(controller, listener):
 				sys.exit()
 		
 		if len(listener.storage['fingers']) == 2:
+			screen.blit(ballImage, (-HEIGHT, WIDTH//2))
 			print "Grab ball"
 		print len(listener.storage['fingers'])
 
