@@ -3,7 +3,7 @@ import random
 
 ballSpeed = 10
 STEP_SIZE = ballSpeed
-WINDOW_SIZE = 400
+WINDOW_SIZE = 600
 
 
 def drawBall(win, ballx, bally):
