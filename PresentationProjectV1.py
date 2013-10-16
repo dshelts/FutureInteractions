@@ -9,19 +9,19 @@ from ClassesFile import *
 pygame.init()
 
 #information for later use is class initialization		
-MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
+MYBALL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (50, 50))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handEmpty.jpg"
+MYOPENPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/handEmpty.jpg"
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (60, 60))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handWithBall.jpg"
+MYCLOSEDPOINTER = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/handWithBall.jpg"
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (60, 60))
 
-OPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Oportal.jpg"
+OPORTAL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/Oportal.jpg"
 oPortal_image = pygame.transform.scale(pygame.image.load(OPORTAL), (100, 50))
 
-BPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Bportal.jpg"
+BPORTAL = "/Users/zevirc/Desktop/Surgeon-Sim/jpgs/Bportal.jpg"
 bPortal_image = pygame.transform.scale(pygame.image.load(BPORTAL), (100, 50))
 #end
 
