@@ -7,7 +7,7 @@ class Ball():
 		#Initializer method for Ball class
 		
 		self.image = image #sets the image of the ball
-
+		self.sizeX, self.sizeY = size
 		self.x, self.y = pos #puts the ball in the starting position
 		self.width, self.height = size #gives the ball its size
 		self.xBound, self.yBound = bounds #sets the boundaries for where the ball can go in the screen
@@ -15,13 +15,50 @@ class Ball():
 		self.vX = 0 #sets the initial velocity of the ball in the horizontal to 0
 		self.vY = 0 #sets the inital velocity of the ball in the vertical to 0
 
-		self.state = 0 # 0 = Falling, 1 = Rising
+		self.state = [1, 1] # 0 = x direction, 0 = y direction
+
+	'''def randomMovement(self):
+		if (self.x == 0 and (self.y == 0 or self.y+self.sizeY+20 >= self.height) or (self.x == self.width and (self.y == 0 or self.y+self.sizeY+20>= self.height)):
+			self.state[0] = -self.state[0]
+			self.state[1] = -self.state[1]
+			return move()
+
+		elif self.y <= 0 or (self.y+self.sizeY+20)>= self.height:
+			self.state[1] = -self.state[1]
+			return move()
+			
+			
+		elif (self.y+self.sizeY+20)>= self.height:
+			self.state = 1
+			return move()
+		'''	
+		
+	def move():		
+		if self.state[0] == -1 and self.state[1] == -1:
+			self.x -= 2
+			self.y += 2
+			return (self.x, self.y)
+		elif self.state[0] == -1 and self.state[1] == 1:
+			self.x -=2	
+			self.y -=2
+			return (self.x, self.y)
+
+		elif self.state[0] == 1 and self.state[1] == -1:
+			self.x +=2
+			self.y +=2
+			return (self.x, self.y)
+
+		elif self.state[0] == 1 and self.state[1] == 1:
+			self.x +=2
+			self.y -=2
+			return (self.x, self.y)
+
 
 	def moveLocation(self, x, y):
-		self.x = x
+		#self.x = x
 		self.y = y
 		self.x += self.vX  #updates the x coordinate
-		self.y += self.vY#updates the y coordinate
+		self.y +=self.vY#updates the y coordinate
 
 		self.checkBounds()#calls the Ball class checkbounds method
 
@@ -117,15 +154,20 @@ class Hand():
 
 
 class Portal():
-	def __init__(self, image, size, pos, bounds):
-		self.image = image
-		self.x, self.y = pos
-		self.state = 0
-		self.vX = 0
-		self.vY = 0
+	def __init__(self, image, size, pos, state, bounds):
+		'''Key for image corners
+		self.y, x = top left  
+		self.y, self.sizeX = bot left
+		self.sizeY, x = top right
+		self.sizeY, self.sizeX = bot right
+		'''
 
-		self.width, self.height = size
-		self.xBound, self.yBound = bounds
+		self.image = image
+		self.sizeY, sizeX = size#bottom right corner
+		self.x, self.y = pos#y,x top left corner
+		self.state = state#direction of movement 1^, 0down
+		self.width, self.height = bounds#the full size of screen
+		
 
 	def directionCheck(self):
 		if self.checkOutOfBounds():
@@ -150,22 +192,36 @@ class Portal():
 
 	def move(self):
 		#self.directionCheck()
-		self.x+= 0
-		if (self.y + self.height) == self.yBound: #lower left corner = HEIGHT bot of screen  
-			self.x = 0
-			self.y = 1#-1 to save the loop
+		#print "move self.y, self.sizeY", self.y, self.sizeY
+		#print "move self.height", self.height
 
-		elif self.y == 0: #if it is at the top right
-			self.x = 0
-			self.y = HEIGHT - self.y - 1#-1 to save the loop
-		
+		if self.y <= 0:
+			self.state = 0
+			return self.down()
+			
+		elif (self.y+self.sizeY+20)>= self.height:
+			self.state = 1
+			return self.up()
+			
 		else:
-			self.x = 0
-			self.y += .5
-		return (self.x, self.y)
+			if self.state == 0:
+				return self.down()
+			if self.state == 1:
+				return self.up()
 
+	def down(self):
+		self.y += 2
+		#print"down x,y", self.x, self.y 
+		
+		return(self.x, self.y)
 
-
+	def up(self):
+		self.y -= 2
+		#print"up, x,y", self.x, self.y 
+		
+		return(self.x, self.y)
+		
+		
 	def checkOutOfBounds(self):
 		
 		
