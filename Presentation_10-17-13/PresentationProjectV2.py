@@ -71,7 +71,7 @@ class LeapListener(Leap.Listener):
 		# 	self.storage['x2'] = normalizedPosition2.x
 		# 	self.storage['y2'] = normalizedPosition2.y
 			
-		if len(frame.fingers) > 0:
+		if len(frame.fingers) == 1:
 			
 
 			self.storage['nofingers'] = False
@@ -82,7 +82,25 @@ class LeapListener(Leap.Listener):
 		
 			self.storage['x1'] = normalizedPosition.x
 			self.storage['y1'] = normalizedPosition.y
+			self.storage['throw'] = False
+			self.storage['velocity'] = finger.tip_velocity
+			self.storage['grabBall'] = True
+
+
+		elif len(frame.fingers) >= 2:
+
+			self.storage['nofingers'] = False
+			self.storage['fingers']   = frame.fingers
+			finger = frame.fingers.frontmost
+			stabilizedPosition = finger.stabilized_tip_position
+			normalizedPosition = interactionBox.normalize_point(stabilizedPosition)#normalizes the position in x,y,z space
 		
+			self.storage['x1'] = normalizedPosition.x
+			self.storage['y1'] = normalizedPosition.y
+			self.storage['throw'] = True
+			self.storage['velocity'] = 0
+			self.storage['grabBall'] = False
+
 
 			#self.storage['x1'] = normalizedPosition.x
 			#self.storage['y1'] = normalizedPosition.y
@@ -152,28 +170,40 @@ def runPygame(controller, listener):
 
 		
 		if not ('x1' in listener.storage):
-			print "print from if not", listener.storage
+			print "waiting for input..."
 			continue
 
-		
-		#if len(listener.storage['fingers']) == 2 and Ball.surrounds:
-		#	print "grab ball"
-		
-		# else:
-			
-		screen.fill(BLACK)
 		pos_x = listener.storage['x1'] * WIDTH
 		pos_y = (1-listener.storage['y1']) * HEIGHT
 		
-		screen.blit(openHandImage, (pos_x, pos_y))
+		
 
-
-		#screen.blit(ballImage, Ballobj.moveLocation(20, 50))
-		#screen.blit(ballImage, Ballobj.randomMovement())
-		screen.blit(oPortalImage, Oportal.move())
-		screen.blit(bPortalImage, Bportal.move())	
+		if listener.storage['grabBall'] == True and Ballobj.surrounds((pos_x,pos_y)):
+			screen.blit(closedHandImage, (pos_x, pos_y))
+			Ballobj.addVelocity(listener.storage['velocity'])
+			pygame.display.update()
+			print"if 1"
 			
-		pygame.display.update()
+
+		elif listener.storage['throw'] == True and listener.storage['grabBall'] == False:
+			screen.blit(ballImage, Ballobj.throw((pos_x, pos_y)))
+			pygame.display.update()
+			print"elif 1"
+
+		#	print "grab ball"
+		
+		else:
+			print"else"
+			
+			screen.fill(BLACK)
+			
+			
+			screen.blit(ballImage, Ballobj.bounce())
+			screen.blit(openHandImage, (pos_x, pos_y))
+			screen.blit(oPortalImage, Oportal.move())
+			screen.blit(bPortalImage, Bportal.move())	
+				
+			pygame.display.update()
 		
 def main():
 	# Initialize Leap stuff

@@ -15,74 +15,67 @@ class Ball():
 		self.vX = 0 #sets the initial velocity of the ball in the horizontal to 0
 		self.vY = 0 #sets the inital velocity of the ball in the vertical to 0
 
-		self.state = [1, 1] # 0 = x direction, 0 = y direction
+		self.state = 0 # 0 = x direction, 0 = y direction
+# command/
+# 	def randomMovement(self):
+# 		if (self.x == 0 and (self.y == 0 or (self.y+self.sizeY+20 >= self.height))):
+# 			print"if left corners" 
+# 			self.state[0] = -self.state[0]
+# 			self.state[1] = -self.state[1]
+# 			return self.move()
+# 		if (self.x == self.width and (self.y == 0 or (self.y+self.sizeY+20>= self.height))):
+# 			print"if right corners"
+# 			self.state[0] = -self.state[0]
+# 			self.state[1] = -self.state[1]
+# 			return self.move()
 
-	def randomMovement(self):
-		if (self.x == 0 and (self.y == 0 or (self.y+self.sizeY+20 >= self.height))):
-			print"if left corners" 
-			self.state[0] = -self.state[0]
-			self.state[1] = -self.state[1]
-			return self.move()
-		if (self.x == self.width and (self.y == 0 or (self.y+self.sizeY+20>= self.height))):
-			print"if right corners"
-			self.state[0] = -self.state[0]
-			self.state[1] = -self.state[1]
-			return self.move()
-
-		if self.y <= 0 or (self.y+self.sizeY+20)>= self.height:
-			print"if bot or top"
-			self.state[1] = -self.state[1]
-			return self.move()
+# 		if self.y <= 0 or (self.y+self.sizeY+20)>= self.height:
+# 			print"if bot or top"
+# 			self.state[1] = -self.state[1]
+# 			return self.move()
 			
 			
-		if (self.y+self.sizeY+20)>= self.height:
-			print"if sides"
-			self.state = 1
-			return self.move()
+# 		if (self.y+self.sizeY+20)>= self.height:
+# 			print"if sides"
+# 			self.state = 1
+# 			return self.move()
 		
 		
-	def move(self):		
-		if self.state[0] == -1 and self.state[1] == -1:
-			self.x -= 2
-			self.y += 2
-			return (self.x, self.y)
-		elif self.state[0] == -1 and self.state[1] == 1:
-			self.x -=2	
-			self.y -=2
-			return (self.x, self.y)
+# 	def move(self):		
+# 		if self.state[0] == -1 and self.state[1] == -1:
+# 			self.x -= 2
+# 			self.y += 2
+# 			return (self.x, self.y)
+# 		elif self.state[0] == -1 and self.state[1] == 1:
+# 			self.x -=2	
+# 			self.y -=2
+# 			return (self.x, self.y)
 
-		elif self.state[0] == 1 and self.state[1] == -1:
-			self.x +=2
-			self.y -=2
-			return (self.x, self.y)
+# 		elif self.state[0] == 1 and self.state[1] == -1:
+# 			self.x +=2
+# 			self.y -=2
+# 			return (self.x, self.y)
 
-		elif self.state[0] == 1 and self.state[1] == 1:
-			self.x +=2
-			self.y -=2
-			return (self.x, self.y)
-
-
-	def moveLocation(self, x, y):
-		#self.x = x
-		self.y = y
-		self.x += self.vX  #updates the x coordinate
-		self.y +=self.vY#updates the y coordinate
+# 		elif self.state[0] == 1 and self.state[1] == 1:
+# 			self.x +=2
+# 			self.y -=2
+# 			return (self.x, self.y)
+# end command/
+	def bounce(self):
+		self.x += self.vX #updates the x coordinate
+		self.y += self.vY#updates the y coordinate
 
 		self.checkBounds()#calls the Ball class checkbounds method
 
 		return (self.x, self.y) #returns the new location
 
-	def grabBall(self, pos):
-		self.x, self.y = pos
-		self.resetGravity()
-		self.checkBounds()
-		return(self.x, self.y)
+	
 
 	def checkBounds(self):
 		#The update method for the Ball class
 		
-		if self.y > self.yBound:
-			self.y = self.yBound
+		if self.y >= self.yBound:
+			self.y = self.yBound-1
 			if self.state == 0:
 				self.state = 1
 			else:
@@ -90,7 +83,7 @@ class Ball():
 
 			self.vY = -self.vY
 
-		if self.x > self.xBound or self.x < 0:
+		if self.x >= self.xBound or self.x <= 0:
 			self.x = self.xBound
 
 		self.vY += .05 # Gravity
@@ -100,17 +93,32 @@ class Ball():
 		self.vY = 0
 		self.vX = 0
 
+	def grabBall(self, pos):
+		self.x, self.y = pos
+		self.resetGravity()
+		self.checkBounds()
+		return(self.x, self.y)
+
 	def surrounds(self, pointer_pos):
 		#surrounds method checks to see if your finger is holding the ball
 		
 		x, y = pointer_pos  #position of the pointer
-		
 
 		if x < (self.x + self.width) and x > (self.x) and y < (self.y + self.height) and y > (self.y): 
 		#if the pointer is the image box
 		#if statement to check to see if your finger and the ball share the same coordinates
 		#returns a boolean
 			return True
+	def addVelocity(self, velocity):
+		v = velocity[2]
+		if(v<0):
+			v = -v
+		self.vX += (v/self.xBound)
+		print"add V", v, ", ", self.vX
+	def throw(self, pos):
+		self.x, self.y = pos
+		return(self.bounce())
+
 #-----BALL CLASS END------------------------------------------------------
 
 
