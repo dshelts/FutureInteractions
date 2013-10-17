@@ -1,3 +1,4 @@
+import pygame
 from graphics import *
 import random
 

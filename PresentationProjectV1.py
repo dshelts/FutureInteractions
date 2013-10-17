@@ -85,7 +85,8 @@ def runPygame(controller, listener):
 	pygame.display.set_caption("Catch")#set title
 
 	background.fill(BLACK)#fill background apperatnel
-	
+	print"should fill background"
+	#playSurface.set_colorkey(BLACK)
 	# instantiate classes here
 		#Ball onFrame
 	Ballobj = Ball(ball_image, (50, 50), (WIDTH//2, 0), SIZE)
@@ -109,6 +110,7 @@ def runPygame(controller, listener):
 	#end COMMAND KEY
 		
 	while True:
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				leapController.remove_listener(LeapListener)
@@ -116,10 +118,9 @@ def runPygame(controller, listener):
 				sys.exit()
 		
 		if len(listener.storage['fingers']) == 2:
-			screen.blit(ballImage, (-HEIGHT, WIDTH//2))
-			print "Grab ball"
-		print len(listener.storage['fingers'])
-
+			screen.blit(ballImage, (-HEIGHT//2, WIDTH//2))
+			print "Should blit ballImage"
+		
 
 
 def main():
