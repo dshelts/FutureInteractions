@@ -17,13 +17,9 @@ class Ball():
 
 		self.state = 0 # 0 = Falling, 1 = Rising
 
-	def moveLocation(self, pos):
-		#updates the position of the ball
-		#if x or y !=0
-		#...
-		#pX, pY = pointer_pos
-		#self.x = pX
-		#self.y = pY
+	def moveLocation(self, x, y):
+		self.x = x
+		self.y = y
 		self.x += self.vX  #updates the x coordinate
 		self.y += self.vY#updates the y coordinate
 
@@ -121,7 +117,7 @@ class Hand():
 
 
 class Portal():
-	def __init__(self, image, size=(50, 100), pos=(0, 0), bounds=(350, 350)):
+	def __init__(self, image, size, pos, bounds):
 		self.image = image
 		self.x, self.y = pos
 		self.state = 0
@@ -153,9 +149,19 @@ class Portal():
 
 
 	def move(self):
-		self.directionCheck()
-		self.x+= self.vX
-		self.y+= self.vY
+		#self.directionCheck()
+		self.x+= 0
+		if (self.y + self.height) == self.yBound: #lower left corner = HEIGHT bot of screen  
+			self.x = 0
+			self.y = 1#-1 to save the loop
+
+		elif self.y == 0: #if it is at the top right
+			self.x = 0
+			self.y = HEIGHT - self.y - 1#-1 to save the loop
+		
+		else:
+			self.x = 0
+			self.y += .5
 		return (self.x, self.y)
 
 
