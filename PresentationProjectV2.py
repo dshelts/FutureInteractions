@@ -2,26 +2,26 @@
 #Basic Game
 
 #Imports
-import Leap, sys, pygame
+import Leap, sys, pygame, os
 from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 from pygame.locals import *
 from ClassesFile import *
 pygame.init()
 
 #information for later use is class initialization		
-MYBALL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/basketball.jpg"
+MYBALL = os.path.join("jpgs", "basketball.jpg")
 ball_image = pygame.transform.scale(pygame.image.load(MYBALL), (50, 50))
 
-MYOPENPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handEmpty.jpg"
+MYOPENPOINTER = os.path.join("jpgs", "handEmpty.jpg")
 openHand_image = pygame.transform.scale(pygame.image.load(MYOPENPOINTER), (60, 60))
 
-MYCLOSEDPOINTER = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/handWithBall.jpg"
+MYCLOSEDPOINTER = os.path.join("jpgs", "handWithBall.jpg")
 closedHand_image = pygame.transform.scale(pygame.image.load(MYCLOSEDPOINTER), (60, 60))
 
-OPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Oportal.jpg"
+OPORTAL = os.path.join("jpgs", "Oportal.jpg")
 oPortal_image = pygame.transform.scale(pygame.image.load(OPORTAL), (50, 100))
 
-BPORTAL = "/Users/dshelts9306/Desktop/Surgeon-Sim/jpgs/Bportal.jpg"
+BPORTAL = os.path.join("jpgs", "Bportal.jpg")
 bPortal_image = pygame.transform.scale(pygame.image.load(BPORTAL), (50, 100))
 #end
 
@@ -32,7 +32,8 @@ available_resolutions = pygame.display.list_modes()
 BLACK = (0,0,0)
 WIDTH = available_resolutions[0][0]
 HEIGHT = available_resolutions[0][1]
-WIDTH, HEIGHT = WIDTH//2, HEIGHT//2
+SCREEN_SCALAR = .9
+WIDTH, HEIGHT = int(WIDTH*SCREEN_SCALAR), int(HEIGHT*SCREEN_SCALAR)
 SIZE = WIDTH, HEIGHT
 
 
@@ -76,14 +77,13 @@ class LeapListener(Leap.Listener):
 
 			self.storage['nofingers'] = False
 			self.storage['fingers']   = frame.fingers
-			finger = frame.fingers.frontmost
-			stabilizedPosition = finger.stabilized_tip_position
+			pointerFinger = frame.fingers.leftmost
+			stabilizedPosition = pointerFinger.stabilized_tip_position
 			normalizedPosition = interactionBox.normalize_point(stabilizedPosition)#normalizes the position in x,y,z space
 		
 			self.storage['x1'] = normalizedPosition.x
 			self.storage['y1'] = normalizedPosition.y
-			self.storage['throw'] = False
-			self.storage['velocity'] = finger.tip_velocity
+			self.storage['velocity'] = pointerFinger.tip_velocity
 			self.storage['grabBall'] = True
 
 
@@ -91,21 +91,15 @@ class LeapListener(Leap.Listener):
 
 			self.storage['nofingers'] = False
 			self.storage['fingers']   = frame.fingers
-			finger = frame.fingers.frontmost
-			stabilizedPosition = finger.stabilized_tip_position
+
+			pointerFinger = frame.fingers.leftmost
+
+			stabilizedPosition = pointerFinger.stabilized_tip_position
 			normalizedPosition = interactionBox.normalize_point(stabilizedPosition)#normalizes the position in x,y,z space
 		
 			self.storage['x1'] = normalizedPosition.x
 			self.storage['y1'] = normalizedPosition.y
-			self.storage['throw'] = True
-			self.storage['velocity'] = 0
 			self.storage['grabBall'] = False
-
-
-			#self.storage['x1'] = normalizedPosition.x
-			#self.storage['y1'] = normalizedPosition.y
-			#self.storage['x2'] = None
-			#self.storage['y2'] = None
 
 		else:
 			self.storage['nofingers'] = True
@@ -129,12 +123,13 @@ def runPygame(controller, listener):
 	font = pygame.font.SysFont("Times New Roman", 200)#font for text
 	pygame.display.set_caption("Catch")#set title
 
-	screen.fill(BLACK)#fill background apperatnel
+	clock = pygame.time.Clock()
+
 	#print"should fill background"
 	#playSurface.set_colorkey(BLACK)
 	# instantiate classes here
 		#Ball onFrame
-	Ballobj = Ball(ball_image, (50, 50), (WIDTH//2, HEIGHT-50), SIZE)
+	Ballobj = Ball(ball_image, (50, 50), (WIDTH//2, 50), SIZE)
 		#Hand onFrame
 	OpenHand  = Hand(openHand_image, (50, 50), (WIDTH//2, 0), SIZE)
 		#Closed Hand onFrame
@@ -148,8 +143,6 @@ def runPygame(controller, listener):
 
 	#COMMAND KEY
 	ballImage = Ballobj.image #ball image access
-	openHandImage = OpenHand.image
-	closedHandImage = ClosedHand.image
 	oPortalImage = Oportal.image
 	bPortalImage = Bportal.image
 	#end COMMAND KEY
@@ -157,10 +150,11 @@ def runPygame(controller, listener):
 	#WIDTH = 682
 	#HEIGHT = 384
 
-	pos_x = 0
-	pos_y = 0
 	score = 0
+	grabbed = False
+
 	while True:
+		clock.tick(60)
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -176,34 +170,39 @@ def runPygame(controller, listener):
 		pos_x = listener.storage['x1'] * WIDTH
 		pos_y = (1-listener.storage['y1']) * HEIGHT
 		
-		
+		screen.fill(BLACK)
 
-		if listener.storage['grabBall'] == True and Ballobj.surrounds((pos_x,pos_y)):
-			screen.fill(BLACK)
-			screen.blit(closedHandImage, (pos_x, pos_y))
-			Ballobj.addVelocity(listener.storage['velocity'])
-			pygame.display.update()
-			print"if 1"
+		if listener.storage['grabBall'] == True and Ballobj.surrounds((pos_x, pos_y)):
+			grabbed = True
+		elif not listener.storage['grabBall']:
+			grabbed = False
+		# if False:
+
+		if grabbed:
+			screen.blit(ClosedHand.image, (pos_x-ClosedHand.width//2, pos_y-ClosedHand.height//2))
 			
+			Ballobj.x = pos_x - Ballobj.sizeX//2
+			Ballobj.y = pos_y - Ballobj.sizeY//2
 
-		elif listener.storage['throw'] == True and listener.storage['grabBall'] == False:
-			screen.fill(BLACK)
-			screen.blit(ballImage, Ballobj.throw((pos_x, pos_y)))
-			pygame.display.update()
-			print"elif 1"
+			Ballobj.updateV(listener.storage['velocity'])
 
-		#	print "grab ball"
-		
+		# elif listener.storage['grabBall'] == False:
 		else:
-			print"else"
-			
-			screen.fill(BLACK)
+			if Oportal.swap((Ballobj.x, Ballobj.y)):
+				print "Teleporting from O to B"
+				Ballobj.x, Ballobj.y = Bportal.x-100, Bportal.y
+			elif Bportal.swap((Ballobj.x, Ballobj.y)):
+				print "Teleporting from B to O"
+				Ballobj.x, Ballobj.y = Oportal.x+100, Oportal.y
+
 			screen.blit(ballImage, Ballobj.bounce())
-			screen.blit(openHandImage, (pos_x, pos_y))
-			screen.blit(oPortalImage, Oportal.move())
-			screen.blit(bPortalImage, Bportal.move())	
+			screen.blit(OpenHand.image, (pos_x-ClosedHand.width//2, pos_y-ClosedHand.height//2))
+			grabbed = False
+
+		screen.blit(oPortalImage, Oportal.move())
+		screen.blit(bPortalImage, Bportal.move())	
 				
-			pygame.display.update()
+		pygame.display.update()
 		
 def main():
 	# Initialize Leap stuff
