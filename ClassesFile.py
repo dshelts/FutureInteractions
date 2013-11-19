@@ -34,7 +34,7 @@ class Ball():
 		gravity  = .2
 		if self.y >= self.yBound-self.height:
 			#floor
-			self.y = self.yBound-1
+			self.y = self.yBound-1-self.height
 			if self.state == 0:
 				self.state = 1
 			else:
