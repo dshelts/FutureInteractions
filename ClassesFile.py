@@ -40,7 +40,7 @@ class Ball():
 			else:
 				self.state = 0
 
-			self.vY = -self.vY*gravity
+			self.vY = -self.vY
 
 		if self.x >= self.xBound:
 			#right
