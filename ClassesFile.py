@@ -200,19 +200,16 @@ class Portal():
 		if self.x >= self.xBound:
 			self.x = self.xBound
 			return True
-		elif self.y >= self.yBound:
+		if self.y >= self.yBound:
 			self.y = self.yBound
 			return True
-		elif self.y <= 0:
+		if self.y <= 0:
 			self.x = 0
 			return True
-		elif self.x <= 0:
+		if self.x <= 0:
 			self.y = 0
 			return True
 
-	#def teleport(self, portal2)
-		#if self.samePlace():
-			#take ball set it to the location of portal2
 		
 #------ END portal Class----------------------------------------------------------------------------------
 	
