@@ -31,7 +31,7 @@ class Ball():
 	def checkBounds(self):
 		#The update method for the Ball class
 		
-		if (self.y+50) >= self.yBound:
+		if self.y >= self.yBound:
 			#floor
 			self.y = self.yBound-1
 			if self.state == 0:
