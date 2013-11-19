@@ -32,7 +32,7 @@ class Ball():
 		#The update method for the Ball class
 		friction = .9
 		gravity  = .2
-		if self.y >= self.yBound:
+		if self.y >= self.yBound-self.height:
 			#floor
 			self.y = self.yBound-1
 			if self.state == 0:
