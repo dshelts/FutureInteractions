@@ -62,7 +62,7 @@ class Ball():
 			self.vX = -self.vX*friction
 
 
-		self.vY += .2 # Gravity
+		self.vY *= .2 # Gravity
 		self.vX *= .995 # Friction
 
 	def resetGravity():
