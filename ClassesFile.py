@@ -57,7 +57,7 @@ class Ball():
 
 		elif self.x <= 0:
 			self.x = 0
-			self.vX = -self.vX
+		self.vX = -self.vX
 
 
 		self.vY += .2 # Gravity
