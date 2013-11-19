@@ -30,7 +30,8 @@ class Ball():
 
 	def checkBounds(self):
 		#The update method for the Ball class
-		
+		friction = .9
+		gravity  = .2
 		if self.y >= self.yBound:
 			#floor
 			self.y = self.yBound-1
@@ -39,12 +40,12 @@ class Ball():
 			else:
 				self.state = 0
 
-			self.vY = -self.vY
+			self.vY = -self.vY*gravity
 
 		if self.x >= self.xBound:
 			#right
 			self.x = self.xBound
-			self.vX = -self.vX
+			self.vX = -self.vX*friction
 
 		elif self.y<=0:#changes 10/31/13
 			#ceiling bind
@@ -53,15 +54,16 @@ class Ball():
 				self.state = 0
 			else:
 				self.state = 1
-			self.vY = -self.vY#end changes
+
+			self.vY = -self.vY*gravity#end changes
 
 		elif self.x <= 0:
 			self.x = 0
-			self.vX = -self.vX
+			self.vX = -self.vX*friction
 
 
-		self.vY += .5 # Gravity
-		self.vX *= .8 # Friction
+		self.vY += .2 # Gravity
+		self.vX *= .995 # Friction
 
 	def resetGravity():
 		self.vY = 0
