@@ -40,7 +40,7 @@ class Ball():
 			else:
 				self.state = 0
 
-			self.vY = -self.vY
+			self.vY = -self.vY*friction
 
 		if self.x >= self.xBound:
 			#right
@@ -62,7 +62,7 @@ class Ball():
 			self.vX = -self.vX*friction
 
 
-		self.vY *= .2 # Gravity
+		self.vY += .2 # Gravity
 		self.vX *= .995 # Friction
 
 	def resetGravity():
