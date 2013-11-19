@@ -48,11 +48,11 @@ class Ball():
 
 		elif self.y<=0:#changes 10/31/13
 			#ceiling bind
-			self.y = self.yBound+1
-			if self.state == 0:
-				self.state = 1
-			else:
+			self.y = 1
+			if self.state == 1:
 				self.state = 0
+			else:
+				self.state = 1
 			self.vY = -self.vY#end changes
 
 		elif self.x <= 0:
