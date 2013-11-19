@@ -1,3 +1,4 @@
+
 #classes file 
 #Andrew Shelton
 
@@ -42,9 +43,20 @@ class Ball():
 		if self.x >= self.xBound:
 			self.x = self.xBound
 			self.vX = -self.vX
+
+		elif self.y<=0:#changes 10/31/13
+			#ceiling bind
+			self.y = self.yBound+1
+			if self.state == 1:
+				self.state = 0
+			else:
+				self.state = 1
+			self.vY = -self.vY#end changes
+
 		elif self.x <= 0:
 			self.x = 0
 			self.vX = -self.vX
+
 
 		self.vY += .2 # Gravity
 		self.vX *= .995 # Friction
