@@ -16,7 +16,7 @@ class Ball():
 		self.vX = 0 #sets the initial velocity of the ball in the horizontal to 0
 		self.vY = 0 #sets the inital velocity of the ball in the vertical to 0
 
-		self.state = 0 # 0 = x direction, 0 = y direction
+		self.state = 0 # 
 
 	def bounce(self):
 		self.x += self.vX #updates the x coordinate
@@ -31,7 +31,8 @@ class Ball():
 	def checkBounds(self):
 		#The update method for the Ball class
 		
-		if self.y >= self.yBound:
+		if (self.y+50) >= self.yBound:
+			#floor
 			self.y = self.yBound-1
 			if self.state == 0:
 				self.state = 1
@@ -41,16 +42,17 @@ class Ball():
 			self.vY = -self.vY
 
 		if self.x >= self.xBound:
+			#right
 			self.x = self.xBound
 			self.vX = -self.vX
 
 		elif self.y<=0:#changes 10/31/13
 			#ceiling bind
 			self.y = self.yBound+1
-			if self.state == 1:
-				self.state = 0
-			else:
+			if self.state == 0:
 				self.state = 1
+			else:
+				self.state = 0
 			self.vY = -self.vY#end changes
 
 		elif self.x <= 0:
