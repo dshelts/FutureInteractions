@@ -104,13 +104,6 @@ class Hand():
 
 		
 		self.image = image
-
-		#initializer for the Hand class
-		
-
-		#initializer for the Hand class
-		
-
 		self.hx, self.hy = pos #sets the initial position of the hand
 		self.width, self.height = size #sets the size of the ball
 		self.xBound, self.yBound = bounds #sets the boundaries of the ball within the screen
@@ -131,20 +124,23 @@ class Hand():
 
 class Portal():
 	def __init__(self, image, size, pos, state, bounds):
-		'''Key for image corners
-		self.y, x = top left  
-		self.y, self.sizeX = bot left
-		self.sizeY, x = top right
-		self.sizeY, self.sizeX = bot right
-		'''
-
+		# Key for image corners
+		# self.y, x = top left  
+		# self.y, self.sizeX = bot left
+		# self.sizeY, x = top right
+		# self.sizeY, self.sizeX = bot right
+		
 		self.image = image
 		self.sizeY, sizeX = size#bottom right corner
 		self.x, self.y = pos#y,x top left corner
 		self.state = state#direction of movement 1^, 0down
 		self.width, self.height = bounds#the full size of screen
 
+		self.score = 0
+
+
 	def swap(self, ballPos):
+		self.score +=1
 		return self.samePlace(ballPos)
 
 	def samePlace(self, pointer_pos):#change
