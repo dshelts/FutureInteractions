@@ -16,8 +16,9 @@ class Ball():
 		self.vX = 0 #sets the initial velocity of the ball in the horizontal to 0
 		self.vY = 0 #sets the inital velocity of the ball in the vertical to 0
 
-		self.state = 0 # 
+		self.state = 0 
 
+		self.score = 0 #score
 	def bounce(self):
 		self.x += self.vX #updates the x coordinate
 		self.y += self.vY #updates the y coordinate
@@ -26,8 +27,12 @@ class Ball():
 
 		return (self.x, self.y) #returns the new location
 
-	
+	def updateScore(self):
+		self.score+=1
 
+	def getScore(self):
+		return self.score
+		
 	def checkBounds(self):
 		#The update method for the Ball class
 		friction = .9
